@@ -1,0 +1,12 @@
+# Blender 3.6.0 MTL File: '宇哲-开口+微笑.blend'
+# www.blender.org
+
+newmtl smile.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd Y:/03 - 智能面扫/4. 素材/宇哲开口视频&微笑视频/smile/smile.png
