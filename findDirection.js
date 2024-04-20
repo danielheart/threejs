@@ -149,16 +149,6 @@ function createScene() {
 
    controls.update()
 }
-function apply(object) {
-   object.updateMatrix()
-   // object.updateMatrixWorld(true)
-   console.log(object.matrix)
-   object.geometry.applyMatrix4(object.matrix)
-   object.position.set(0, 0, 0)
-   object.rotation.set(0, 0, 0)
-   // object.scale.set(1, 1, 1)
-   object.updateMatrix()
-}
 let raycaster = new THREE.Raycaster()
 const raycastDistance = 12
 function detectNumber(direction) {
