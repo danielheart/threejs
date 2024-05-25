@@ -24,7 +24,7 @@ function createScene() {
 
    //camera
    camera = new THREE.PerspectiveCamera(35, width / height, 1, 10000)
-   camera.position.set(0, -600, 0)
+   camera.position.set(600, -800, 100)
    scene.add(camera)
 
    //renderer
@@ -60,27 +60,39 @@ function loadModel() {
       const mesh = new THREE.Mesh(geom, material)
       scene.add(mesh)
    })
+   const files = [
+      'ref-mid.stl',
+      '/ref-surface.stl',
+      '/ref-plane1.stl',
+      '/ref-plane2.stl',
+      '/ref-plane3.stl',
+   ]
+   files.forEach((file) => {
+      loader.load(file, function (geom) {
+         const mat = new THREE.MeshPhongMaterial({
+            color: 0x000000,
+            side: THREE.DoubleSide,
 
-   loader.load('/reflineAndPlane.stl', function (geom) {
-      const mat = new THREE.MeshPhongMaterial({
-         color: 0x16c2a6,
-         side: THREE.DoubleSide,
+            transparent: true, // 将材质设为半透明
+            opacity: 0.15, // 设置透明度值
+         })
+         // 创建半透明材质
 
-         transparent: true, // 将材质设为半透明
-         opacity: 0.2, // 设置透明度值
+         const mesh = new THREE.Mesh(geom, mat)
+         scene.add(mesh)
+
+         // 创建边框几何体
+         const edges = new THREE.EdgesGeometry(geom)
+         const lineMaterial = new THREE.LineBasicMaterial({
+            color: 0x000000,
+            transparent: true, // 将材质设为半透明
+            opacity: 0.15, // 设置透明度值
+         })
+
+         // 创建边框网格并添加到场景中
+         const lineSegments = new THREE.LineSegments(edges, lineMaterial)
+         mesh.add(lineSegments)
       })
-      // 创建半透明材质
-
-      const mesh = new THREE.Mesh(geom, mat)
-      scene.add(mesh)
-
-      // 创建边框几何体
-      const edges = new THREE.EdgesGeometry(geom)
-      const lineMaterial = new THREE.LineBasicMaterial({ color: 0x16c2a6 })
-
-      // 创建边框网格并添加到场景中
-      const lineSegments = new THREE.LineSegments(edges, lineMaterial)
-      mesh.add(lineSegments)
    })
 
    const objLoader = new OBJLoader()

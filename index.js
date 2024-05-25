@@ -63,7 +63,7 @@ function init() {
 // 创建球体
 const faceDotGeom = new THREE.SphereGeometry(0.015, 20, 20)
 const faceDotmat = new THREE.MeshPhongMaterial({ color: 0x55aa22 })
-const teethDotGeom = new THREE.SphereGeometry(0.8, 20, 20)
+const teethDotGeom = new THREE.SphereGeometry(0.1, 20, 20)
 const teethDotmat = new THREE.MeshPhongMaterial({ color: 0xff5522 })
 // 创建Raycaster对象
 let raycaster = new THREE.Raycaster()
@@ -205,7 +205,7 @@ function onDocumentMouseDown(event) {
          }
       }
 
-      if (teethPositions.length < 4 && mouse.x < 1 && mouse.y < -1) {
+      if (teethPositions.length < 1000 && mouse.x < 1 && mouse.y < -1) {
          // 更新Raycaster对象
          const mouse2 = new THREE.Vector2()
          mouse2.copy(mouse)
@@ -230,6 +230,11 @@ function onDocumentMouseDown(event) {
          alignAndDetect()
          isAlign = true
       }
+   } else if (event.button == 2) {
+      // 转化为二维数组
+      const array2d = teethPositions.map((point) => [point.x, point.y, point.z])
+
+      console.log(array2d)
    }
 }
 
@@ -393,7 +398,7 @@ function addDragControl() {
 function loadModel() {
    //add stl files
    const loader = new STLLoader()
-   loader.load('/upperJaw.stl', function (geometry) {
+   loader.load('/abutment.stl', function (geometry) {
       const material = new THREE.MeshPhongMaterial({
          color: 0xfffffa,
          side: THREE.DoubleSide,

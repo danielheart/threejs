@@ -279,6 +279,7 @@ function exportToOBJ(object, filename) {
 
 function createLights() {
    const ambientLight = new THREE.AmbientLight(0xffffff, 0.1)
+   scene.add(ambientLight)
 
    const sunlight = new THREE.DirectionalLight(0xffffff, 2.5)
    sunlight.position.set(-0.42, 0.42, 1-100)
@@ -288,7 +289,7 @@ function createLights() {
 
    const sunlight3 = new THREE.DirectionalLight(0x5c636f, 0.3)
    sunlight3.position.set(0.75, 1, 0.3-100)
-   scene.add(ambientLight)
+   
    camera.add(sunlight, sunlight2, sunlight3)
 }
 
